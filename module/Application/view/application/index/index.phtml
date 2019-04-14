@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sistema de atendimento a demanda</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+
+</head>
+<body>
+
+<div id="cad">
+
+    <h1>Sistema de atendimento a demanda</h1>
+
+    <?php
+
+        $_SESSION['dados'] = ($_SESSION['dados'] ?? []); 
+
+        $solicitante = $_SESSION['dados']['solicitante'];
+        $assuntoModel = $_SESSION['dados']['assunto'];
+
+        $cpf = ($solicitante->cpf ?? null);
+        $nome = ($solicitante->nome ?? null);
+        $cep = ($solicitante->cep ?? null);
+        $municipio = ($solicitante->municipio ?? null);
+        $uf = ($solicitante->uf ?? null);
+        $email = ($solicitante->email ?? null);
+        $ddd = ($solicitante->ddd ?? null);
+        $telefone = ($solicitante->telefone ?? null);
+        $assunto = ($assuntoModel->assunto ?? null);
+        $detalhes = ($assuntoModel->detalhes ?? null);
+
+    ?>
+
+
+    <form action="<?=$this->url('application',['action'=>'processar'])?>" method="POST">
+
+        <h3 class='alert'>
+            <?=($_SESSION['dados']['msg'] ?? null)?>
+        </h3>
+    
+        <label>Nome do solicitante *</label>
+        <input type="text" name="nome" value="<?=$nome?>"/>
+        <label>CPF *</label>
+        <input type="text" name="cpf" value="<?=$cpf?>">
+        <label>CEP</label>
+        <input type="text" name="cep" value="<?=$cep?>">
+        <label>Município</label>
+        <input type="text" name="municipio" value="<?=$municipio?>">
+        <label>UF</label>
+        <input type="text" name="uf" value="<?=$uf?>">
+        <label>E-mail</label>
+        <input type="email" name="email" value="<?=$email?>">
+        <label>DDD</label>
+        <input type="text" name="ddd" value="<?=$ddd?>">
+        <label>Telefone</label>
+        <input type="text" name="telefone" value="<?=$telefone?>">
+        <label>Assunto *</label>
+        <input type="text" name="assunto" value="<?=$assunto?>">
+        <label>Detalhes *</label>
+        <textarea name="detalhes" id="" cols="30" rows="7"><?=$detalhes?></textarea>
+
+        <button type="submit">gravar</button>
+    
+    </form>
+
+</div>
+    
+</body>
+</html>
